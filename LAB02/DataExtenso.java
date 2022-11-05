@@ -1,5 +1,4 @@
 import java.util.Scanner;
-import java.util.ArrayList;
 
 class DataExtenso{ 
     public static void main(String[] args) {
