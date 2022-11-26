@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Ensalamento {
     ArrayList<Sala> salas;
@@ -12,16 +13,19 @@ public class Ensalamento {
     }
 
     public void addSala(Sala sala) {
-        salas.add(sala);
+        this.salas.add(sala);
+        // Collections.sort(this.salas);
     }
 
     public ArrayList<Sala> getSalas(){
         return this.salas;
     }
-    
+
     public void addTurma(Turma turma) {
-        turmas.add(turma);
+        this.turmas.add(turma);
+        Collections.sort(this.turmas);
     }
+
 
     public Sala getSala(Turma turma) {
         for (TurmaEmSala turmaEmSala : this.ensalamento) 
@@ -54,7 +58,8 @@ public class Ensalamento {
     public boolean alocar(Turma turma, Sala sala) {
         TurmaEmSala turmaEmSala = new TurmaEmSala(turma, sala);
         if (((turma.acessivel == sala.acessivel) || (sala.acessivel)) && (turma.numAlunos <= sala.capacidade) && (salaDisponivel(sala, turma.horarios))){
-            ensalamento.add(turmaEmSala);
+            this.ensalamento.add(turmaEmSala);
+            
             return true;
         }
         return false;
