@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class Turma{
+public class Turma implements Comparable<Turma>{
     String nome, professor;
     int numAlunos;
     boolean acessivel;
@@ -43,6 +43,19 @@ public class Turma{
     String getDescricao(){
         if(this.acessivel == true) return String.format("Turma: %s\nProfessor: %s\nNúmero de Alunos: %d\nHorário: %s\nAcessível: sim", this.nome,this.professor,this.numAlunos,getHorariosString());
         return String.format("Turma: %s\nProfessor: %s\nNúmero de Alunos: %d\nHorário: %s\nAcessível: não", this.nome,this.professor,this.numAlunos,getHorariosString());
+    }
+    public int getNumAlunos(){
+        return this.numAlunos;
+    }
+
+    @Override
+    public int compareTo(Turma outraTurma){
+        if (this.numAlunos < outraTurma.getNumAlunos()){
+            return 1;
+        }else if(this.numAlunos > outraTurma.getNumAlunos()){
+            return -1;
+        }
+        return 0;
     }
 
 }
