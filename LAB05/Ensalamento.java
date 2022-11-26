@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 
-
 public class Ensalamento {
     ArrayList<Sala> salas;
     ArrayList<Turma> turmas;
@@ -16,21 +15,24 @@ public class Ensalamento {
         salas.add(sala);
     }
 
+    public ArrayList<Sala> getSalas(){
+        return this.salas;
+    }
+    
     public void addTurma(Turma turma) {
         turmas.add(turma);
     }
 
     public Sala getSala(Turma turma) {
-        for (TurmaEmSala turmaEmSala : ensalamento) {
-            if (turmaEmSala.turma == turma) {
+        for (TurmaEmSala turmaEmSala : this.ensalamento) 
+            if (turmaEmSala.turma == turma) 
                 return turmaEmSala.sala;
-            }
-        }
+            
         return null;
     }
 
     public boolean salaDisponivel(Sala sala, int horario) {
-        for (TurmaEmSala turmaEmSala : ensalamento) {
+        for (TurmaEmSala turmaEmSala : this.ensalamento) {
             if (turmaEmSala.sala == sala) {
                 for (int i=0; i<turmaEmSala.turma.horarios.size(); i++) {
                     if (turmaEmSala.turma.horarios.get(i) == horario) {
@@ -68,7 +70,7 @@ public class Ensalamento {
 
     public int getTotalTurmasAlocadas() {
         int qtdeTurmas = 0;
-        for (TurmaEmSala turmaEmSala : ensalamento) {
+        for (TurmaEmSala turmaEmSala : this.ensalamento) {
             if (turmaEmSala != null) { qtdeTurmas++; }
         }
         return qtdeTurmas;
@@ -86,18 +88,17 @@ public class Ensalamento {
 
     public String relatorioResumoEnsalamento() {
         return String.format("Total de Salas: %d\nTotal de Turmas: %d\nTurmas Alocadas: %d\nEspaços Livres: %d\n",
-                             salas.size(), turmas.size(), getTotalTurmasAlocadas(), getTotalEspacoLivre());
+                             this.salas.size(), this.turmas.size(), getTotalTurmasAlocadas(), getTotalEspacoLivre());
     }
 
     public String relatorioTurmasPorSala() {
         StringBuilder str = new StringBuilder(relatorioResumoEnsalamento());
-        for (Sala sala : salas) {
+        for (Sala sala : this.salas) {
             str.append(String.format("\n--- %s ---\n\n", sala.getDescricao()));
-            for (TurmaEmSala turmaEmSala : ensalamento) {
-                if (turmaEmSala.sala == sala) {
+            for (TurmaEmSala turmaEmSala : this.ensalamento) 
+                if (turmaEmSala.sala == sala) 
                     str.append(String.format("%s\n", turmaEmSala.turma.getDescricao()));
-                }
-            }
+            
         }
         return str.toString();
     }
@@ -107,11 +108,10 @@ public class Ensalamento {
         for (Turma turma : turmas) {
             str.append(String.format("\n%s", turma.getDescricao()));
 
-            if (getSala(turma) != null) {
+            if (getSala(turma) != null) 
                 str.append(String.format("\nSala: %s\n", getSala(turma).getDescricao()));
-            } else {
+            else 
                 str.append("\nSala: SEM SALA\n\n");
-            }
         }
         return str.toString();
     }
